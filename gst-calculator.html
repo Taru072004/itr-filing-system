@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GST Calculator | TaxEase</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h2>GST Calculator</h2>
+  <div class="calculator">
+    <label>Enter Amount:</label>
+    <input type="number" id="amount" placeholder="Enter amount">
+    <label>GST Rate (%):</label>
+    <input type="number" id="gstRate" placeholder="e.g. 18">
+    <button onclick="calculateGST()">Calculate</button>
+    <p id="result"></p>
+  </div>
+
+  <script>
+    function calculateGST() {
+      const amount = parseFloat(document.getElementById('amount').value);
+      const gstRate = parseFloat(document.getElementById('gstRate').value);
+      if (isNaN(amount) || isNaN(gstRate)) {
+        document.getElementById('result').innerText = "Please enter valid values.";
+        return;
+      }
+      const gst = (amount * gstRate) / 100;
+      const total = amount + gst;
+      document.getElementById('result').innerText = `GST: ₹${gst.toFixed(2)} | Total: ₹${total.toFixed(2)}`;
+    }
+  </script>
+</body>
+</html>

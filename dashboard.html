@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard - ITR Portal</title>
+<link rel="stylesheet" href="style.css">
+<style>
+/* Dashboard-specific overrides and animations */
+.columns .column {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: all 0.6s ease-out;
+}
+
+.collector {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 120px;
+  animation: floatCollector 4s ease-in-out infinite;
+  z-index: 100;
+}
+
+@keyframes floatCollector {
+  0% { transform: translateY(0px) rotate(-5deg); }
+  25% { transform: translateY(-15px) rotate(5deg); }
+  50% { transform: translateY(0px) rotate(-5deg); }
+  75% { transform: translateY(15px) rotate(5deg); }
+  100% { transform: translateY(0px) rotate(-5deg); }
+}
+
+/* Form Styling */
+#itr-form {
+  display: none;
+  margin: 20px auto;
+  max-width: 500px;
+  background: white;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+#itr-form input, #itr-form select {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+#itr-form button {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 12px 20px;
+  cursor: pointer;
+}
+
+#itr-form button:hover {
+  background-color: #45a049;
+}
+</style>
+</head>
+<body>
+
+<header>ITR Portal Dashboard</header>
+
+<div class="columns">
+  <div class="column" id="itrColumn">
+    <h3>ITR Filing</h3>
+    <p>File your Income Tax Return quickly and securely.</p>
+  </div>
+
+  <div class="column" onclick="window.open('https://www.incometax.gov.in/iec/foportal', '_blank')">
+    <h3>Forms</h3>
+    <p>Access all necessary government forms for filing taxes.</p>
+  </div>
+
+  <div class="column" onclick="window.open('https://www.incometax.gov.in/know-your-rights', '_blank')">
+    <h3>Know Your Rights</h3>
+    <p>Understand your rights as a taxpayer in India.</p>
+  </div>
+</div>
+
+<!-- ITR Filing Form -->
+<div id="itr-form">
+  <h3>ITR Filing Form</h3>
+  <input type="text" id="name" placeholder="Enter Name" required>
+  <input type="number" id="salary" placeholder="Enter Salary" required>
+  <input type="number" id="expense" placeholder="Enter Expense" required>
+  <select id="verification">
+    <option value="">Select Verification</option>
+    <option value="aadhaar">Aadhaar</option>
+    <option value="pan">PAN</option>
+    <option value="passport">Passport</option>
+  </select>
+  <input type="file" id="documents">
+  <button onclick="submitForm()">Submit</button>
+</div>
+
+<img src="https://i.imgur.com/6J1P7h9.png" alt="Tax Collector" class="collector">
+
+<script>
+// Animate columns on load
+window.addEventListener('DOMContentLoaded', () => {
+  const columns = document.querySelectorAll('.column');
+  columns.forEach((col, index) => {
+    setTimeout(() => {
+      col.style.opacity = 1;
+      col.style.transform = 'translateY(0)';
+    }, index * 200);
+  });
+});
+
+// ITR column click
+document.getElementById('itrColumn').addEventListener('click', () => {
+  const form = document.getElementById('itr-form');
+  form.style.display = 'block';
+  form.scrollIntoView({behavior: 'smooth'});
+});
+
+// Form submission
+function submitForm() {
+  const name = document.getElementById('name').value;
+  const salary = document.getElementById('salary').value;
+  const expense = document.getElementById('expense').value;
+  const verification = document.getElementById('verification').value;
+
+  if(!name || !salary || !expense || !verification) {
+    alert('Please fill all fields and select verification');
+    return;
+  }
+
+  alert('Submitted');
+  document.getElementById('itr-form').reset();
+  document.getElementById('itr-form').style.display = 'none';
+}
+</script>
+
+</body>
+</html>

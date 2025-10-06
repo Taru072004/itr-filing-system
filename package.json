@@ -1,0 +1,20 @@
+{
+  "name": "itr-gst-website",
+  "version": "1.0.0",
+  "description": "ITR filing website with login, registration, GST calculator, and chatbot features",
+  "type": "module",
+  "main": "server.mjs",
+  "scripts": {
+    "start": "node server.mjs"
+  },
+  "author": "Aryan Kumar",
+  "license": "MIT",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^2.2.0",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "mongoose": "^7.5.0"
+  }
+}
